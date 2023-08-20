@@ -7,7 +7,7 @@ try:
     conexao = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="Anfitras01;!",
+        password="senha",
         port=3306,
         database="ConexaoMysqlPython"
     )
