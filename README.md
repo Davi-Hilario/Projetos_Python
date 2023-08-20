@@ -1,3 +1,3 @@
 # Projetos_Python
 
-<center>Repositório Destinado aos meus projetos com Python</center>
+<h2>Repositório Destinado aos meus projetos com Python</h2>
