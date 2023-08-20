@@ -68,10 +68,10 @@ def deletarDados():
 def alterarDados():
     #Alterando dados da tabela pessoa
     try:
-        comando.execute("Update Pessoa set nome = 'Davi' where id = 3;")
+        comando.execute("Update Pessoa set nome = 'Isack' where id = 3;")
+        conexao.commit()
     except mysql.connector.Error as err:
         print(f"Erro ao alterar o registro: {err}")
-        conexao.commit()
     else:
         print("Registro alterado com sucesso!")
 
