@@ -1,6 +1,8 @@
 import psutil as ps
 from tkinter import *
 from tkinter import ttk
+from PIL import ImageTk
+from urllib.request import urlopen
 from datetime import datetime
 from time import sleep
 
@@ -49,6 +51,7 @@ class App(Functions):
         self.config()
         self.frame()
         self.label()
+        self.logo()
         self.buttons()
         self.root.mainloop() # loop para que a janela continue aberta após execução do código
 
@@ -159,6 +162,23 @@ class App(Functions):
             
         self.btnAnalisar.place(relx=.5, rely=.8, relwidth=.44, relheight=.1)
 
+    def logo(self):
+        
+        url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5SreHVKgbi9PHq3HZ8DUKKJHQu0IBAfXtkA&usqp=CAU"
+
+        open = urlopen(url)
+
+        data = open.read()
+
+        open.close()
+
+        image = ImageTk.PhotoImage(data=data)
+
+        self.logo = Label(self.container, image=image, bg='#0072AF')
+        self.logo.image = image
+
+        self.logo.place(relx=.44, rely=.25, relheight=.2, relwidth=.15)
+
     def buttons(self):
 
         btnWidth = .4
@@ -175,7 +195,7 @@ class App(Functions):
             fg='white'
         )
             
-        self.btnGraph.place(relx=btnPosX, rely=.3, relwidth=btnWidth, relheight=btnHeight)
+        self.btnGraph.place(relx=btnPosX, rely=.5, relwidth=btnWidth, relheight=btnHeight)
         
         # Monitoriar CPU
         self.btnCpu = Button(
@@ -186,7 +206,7 @@ class App(Functions):
             bg='#00809A',
             fg='white'
         )
-        self.btnCpu.place(relx=btnPosX, rely=.41, relwidth=btnWidth, relheight=btnHeight)
+        self.btnCpu.place(relx=btnPosX, rely=.61, relwidth=btnWidth, relheight=btnHeight)
     
         # Monitorar Memória
         self.btnMemo = Button(
@@ -197,7 +217,7 @@ class App(Functions):
             bg='#00809A',
             fg='white'
         )
-        self.btnMemo.place(relx=btnPosX, rely=.52, relwidth=btnWidth, relheight=btnHeight)
+        self.btnMemo.place(relx=btnPosX, rely=.72, relwidth=btnWidth, relheight=btnHeight)
 
         # Monitorar Disco 
         self.btnDisk = Button(
@@ -208,6 +228,6 @@ class App(Functions):
             bg='#00809A',
             fg='white'
         )
-        self.btnDisk.place(relx=btnPosX, rely=.63, relwidth=btnWidth, relheight=btnHeight)
+        self.btnDisk.place(relx=btnPosX, rely=.83, relwidth=btnWidth, relheight=btnHeight)
 
 App()
