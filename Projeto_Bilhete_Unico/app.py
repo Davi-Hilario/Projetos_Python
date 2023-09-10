@@ -17,8 +17,6 @@ class Functions():
 
         self.root.after(1000, self.getCpu)
 
-
-
     def getDisk(self):
         disco1 = disco2 = round(ps.disk_usage('/').percent,1)
 
@@ -41,7 +39,6 @@ class Functions():
         self.lista.insert("",END, values=(memo1, memo2, memo3, horario))
 
         self.root.after(1000, self.getMemo)
-
 
 root = Tk() # criando a janela
 
