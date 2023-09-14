@@ -1,0 +1,7 @@
+# Modulos do Node e .Env ----------------
+Projeto_Bilhete_Unico/site/package-lock.json
+Projeto_Bilhete_Unico/site/node_modules
+Projeto_Bilhete_Unico/site/.env
+
+# Modulos do Python
+Projeto_Bilhete_Unico/site/src/python/__pycache__/functions.cpython-311.pyc
