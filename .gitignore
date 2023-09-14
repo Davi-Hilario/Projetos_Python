@@ -5,3 +5,6 @@ Projeto_Bilhete_Unico/site/.env
 
 # Modulos do Python
 Projeto_Bilhete_Unico/site/src/python/__pycache__/functions.cpython-311.pyc
+Projeto_Bilhete_Unico/site/src/python/__pycache__/connection.cpython-311.pyc
+Projeto_Bilhete_Unico/site/src/python/__pycache__/data.cpython-311.pyc
+Projeto_Bilhete_Unico/site/src/python/__pycache__/ux.cpython-311.pyc
