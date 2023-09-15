@@ -1,7 +1,7 @@
 import psutil as ps
 from tkinter import *
 from math import *
-import connection as con
+import config as con
 
 from datetime import datetime
 
@@ -42,4 +42,33 @@ class Functions():
         self.lista.insert("",END, values=(memo1, memo2, memo3, horario))
 
         self.root.after(1000, self.getMemo)
+    
+    def getAll(self):
+
+        cpu1 = round(ps.cpu_percent(),1)
+        cpu3 = round(abs(cpu1 - (ceil(sqrt(cpu1))) - (floor(cpu1 * 0.05))),1)
+        cpu2 = round(cpu1 + (0.1 * cpu1) - (0.05 * cpu3),1)
+
+        disco1 = disco2 = round(ps.disk_usage('/').percent,1)
+        disco2 = round(disco2 - (0.05 * disco1),1)
+        disco3 = round((disco2 * 3),1)
+
+        memo1 = round(ps.virtual_memory().percent,1)
+        memo3 = round(memo1 - (floor(tan(0.5 * tan(memo1)))) - (ceil(sin(sqrt(memo1)))),1)
+        memo2 = round(memo1 + (0.15 * memo1) + (0.05 * memo3),1)
+
+        horario = datetime.now()
+        
+        self.lista.insert("",END, values=(
+            cpu1, cpu2, cpu3,
+            memo1, memo2, memo3,
+            disco1, disco2, disco3,
+            horario
+        ))
+
+        con.insertData(cpu1, memo1, disco1, 1)
+        con.insertData(cpu2, memo2, disco2, 2)
+        con.insertData(cpu3, memo3, disco3, 3)
+
+        self.root.after(1000, self.getAll)
 

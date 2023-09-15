@@ -124,6 +124,82 @@ class App(Functions):
             
         self.btnAnalisar.place(relx=.5, rely=.8, relwidth=.44, relheight=.1)
 
+    def createAllDataList(self):
+
+        self.container.destroy()
+
+        self.frame()
+
+        self.lista = ttk.Treeview(
+            self.container,
+            height=3,
+            columns=(
+                'col1', 'col2', 'col3', 'col4', 'col5',
+                'col6', 'col7', 'col8', 'col9', 'col10'
+            )
+        )
+        
+        self.lista.heading('#0', text='')
+        self.lista.column("#0", width=1)
+
+        self.lista.heading('#1', text="cpu1") 
+        self.lista.column("#1", width=50)
+
+        self.lista.heading('#2', text="cpu2") 
+        self.lista.column("#2", width=50)
+
+        self.lista.heading('#3', text="cpu3") 
+        self.lista.column("#3", width=50)
+
+        self.lista.heading('#4', text="memo1") 
+        self.lista.column("#4", width=50)
+
+        self.lista.heading('#5', text="memo2") 
+        self.lista.column("#5", width=50)
+
+        self.lista.heading('#6', text="memo3") 
+        self.lista.column("#6", width=50)
+
+        self.lista.heading('#7', text="disco1") 
+        self.lista.column("#7", width=50)
+
+        self.lista.heading('#8', text="disco2") 
+        self.lista.column("#8", width=50)
+
+        self.lista.heading('#9', text="disco3") 
+        self.lista.column("#9", width=50)
+
+        self.lista.heading('#10', text='HORÁRIO')  
+        self.lista.column("#10", width=120)
+
+        self.lista.place(relx=0.02, rely=.05, relwidth=.9, relheight=.7)
+
+        self.scroll = Scrollbar(self.container, orient='vertical')
+        self.lista.configure(yscroll=self.scroll.set)
+        self.scroll.place(relx=0.92, rely=0.05, relwidth=.05, relheight=.7)
+
+        self.btnVoltar = Button(
+            self.container, 
+            command=App,
+            text="Voltar", 
+            font='Arial 10 bold',
+            bg='#00809A',
+            fg='white'
+        )
+            
+        self.btnVoltar.place(relx=.05, rely=.8, relwidth=.44, relheight=.1)
+
+        self.btnAnalisar = Button(
+            self.container, 
+            command=lambda: self.getAll(),
+            text="Registrar Dados", 
+            font='Arial 10 bold',
+            bg='#00809A',
+            fg='white'
+        )
+            
+        self.btnAnalisar.place(relx=.5, rely=.8, relwidth=.44, relheight=.1)
+
     def logo(self):
         
         url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5SreHVKgbi9PHq3HZ8DUKKJHQu0IBAfXtkA&usqp=CAU"
@@ -148,16 +224,16 @@ class App(Functions):
         btnPosX = .3
 
         # Monitorar Todos os Dados
-        self.btnGraph = Button(
+        self.btnReadAll = Button(
             self.container, 
-            command=lambda: self.createList('DISCO'),
-            text="Comparação de Performance", 
+            command=lambda: self.createAllDataList(),
+            text="Ler Todos os Dados", 
             font='Arial 10 bold',
             bg='#00809A',
             fg='white'
         )
             
-        self.btnGraph.place(relx=btnPosX, rely=.5, relwidth=btnWidth, relheight=btnHeight)
+        self.btnReadAll.place(relx=btnPosX, rely=.5, relwidth=btnWidth, relheight=btnHeight)
         
         # Monitoriar CPU
         self.btnCpu = Button(
@@ -191,3 +267,4 @@ class App(Functions):
             fg='white'
         )
         self.btnDisk.place(relx=btnPosX, rely=.83, relwidth=btnWidth, relheight=btnHeight)
+        
