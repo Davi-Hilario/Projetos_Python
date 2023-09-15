@@ -1,0 +1,139 @@
+/* Configurações Padrão */
+*{
+    font-family: arial;
+    color: rgb(231, 248, 252);
+}
+
+h1{
+    margin:0;
+    padding: 0;
+}
+
+body, html{
+    padding: 0;
+    margin:0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(13, 14, 29);
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .bg-dark-blue{
+    background-color: rgb(22, 27, 94);
+}
+
+.container .bg-light-blue{
+    background-color: rgb(70, 77, 167);
+}
+
+/* Configurações do Header */
+.header{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1{
+    font-size: 40px;
+}
+
+.header h3{
+    font-weight: lighter;
+}
+
+
+/* Configurações dos Cards */
+.main{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .container{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card{
+    width: 30%;
+    height: 80%;
+    border-radius: 15px;
+    transition: .5s ease;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgb(151, 167, 255);
+    padding: 5px;
+    transition: .5s ease;
+}
+
+.card-header{
+    width: 90%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-body{
+    width: 90%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.card-body img{
+    width: 100%;
+    height: auto;
+}
+
+.card-body p{
+    font-weight: bold;
+}
+
+.card-footer{
+    width: 90%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-footer button{
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.card-footer button:hover{
+    opacity: .8;
+    transition: .3s ease;
+}
+
