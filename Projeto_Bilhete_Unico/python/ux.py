@@ -1,4 +1,4 @@
-from data import Functions
+from enlist import Enlist
 from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk
@@ -6,7 +6,7 @@ from urllib.request import urlopen
 
 root = Tk() # criando a janela
 
-class App(Functions):
+class App(Enlist):
 
     def __init__(self):
         self.root = root
@@ -45,35 +45,20 @@ class App(Functions):
             )
         self.titulo.place(relx=0, rely=.1, relwidth=1, relheight=.1)
 
-    def createList(self, component):
-        
-        col1 = col2 = col3 = ''
-        labelBotao = ''
-
-        if(component == 'CPU'):
-            col1 = 'CPU 1'
-            col2 = 'CPU 2'
-            col3 = 'CPU 3'
-            labelBotao = 'Analisar CPU'
-            comando = self.getCpu
-
-        elif(component == 'MEMO'):
-            col1 = 'MEMORIA 1'
-            col2 = 'MEMORIA 2'
-            col3 = 'MEMORIA 3'
-            labelBotao = 'Analisar Memória'
-            comando = self.getMemo
-
-        elif(component == 'DISCO'):
-            col1 = 'DISCO 1'
-            col2 = 'DISCO 2'
-            col3 = 'DISCO 3'
-            labelBotao = 'Analisar Disco'
-            comando = self.getDisk
+    def createList(self, index):
 
         self.container.destroy()
 
         self.frame()
+
+        self.tituloCaixa = Label(
+            self.container, 
+            text=f"Caixa Eletrônico {index}", 
+            font='Arial 18 bold',
+            bg='#0072AF',
+            fg='white'
+            )
+        self.tituloCaixa.place(relx=0, rely=.05, relwidth=1, relheight=.1)
 
         self.lista = ttk.Treeview(
             self.container,
@@ -84,23 +69,23 @@ class App(Functions):
         self.lista.heading('#0', text='')
         self.lista.column("#0", width=1)
 
-        self.lista.heading('#1', text=col1) 
+        self.lista.heading('#1', text="CPU") 
         self.lista.column("#1", width=50)
 
-        self.lista.heading('#2', text=col2) 
+        self.lista.heading('#2', text="MEMORIA") 
         self.lista.column("#2", width=50)
 
-        self.lista.heading('#3', text=col3) 
+        self.lista.heading('#3', text="DISCO") 
         self.lista.column("#3", width=50)
 
         self.lista.heading('#4', text='HORÁRIO')  
         self.lista.column("#4", width=120)
 
-        self.lista.place(relx=0.02, rely=.05, relwidth=.9, relheight=.7)
+        self.lista.place(relx=.05, rely=.2, relwidth=.9, relheight=.4)
 
         self.scroll = Scrollbar(self.container, orient='vertical')
         self.lista.configure(yscroll=self.scroll.set)
-        self.scroll.place(relx=0.92, rely=0.05, relwidth=.05, relheight=.7)
+        self.scroll.place(relx=.921, rely=.2, relwidth=.03, relheight=.4)
 
         self.btnVoltar = Button(
             self.container, 
@@ -113,92 +98,7 @@ class App(Functions):
             
         self.btnVoltar.place(relx=.05, rely=.8, relwidth=.44, relheight=.1)
 
-        self.btnAnalisar = Button(
-            self.container, 
-            command=comando,
-            text=labelBotao, 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
-            
-        self.btnAnalisar.place(relx=.5, rely=.8, relwidth=.44, relheight=.1)
-
-    def createAllDataList(self):
-
-        self.container.destroy()
-
-        self.frame()
-
-        self.lista = ttk.Treeview(
-            self.container,
-            height=3,
-            columns=(
-                'col1', 'col2', 'col3', 'col4', 'col5',
-                'col6', 'col7', 'col8', 'col9', 'col10'
-            )
-        )
-        
-        self.lista.heading('#0', text='')
-        self.lista.column("#0", width=1)
-
-        self.lista.heading('#1', text="cpu1") 
-        self.lista.column("#1", width=50)
-
-        self.lista.heading('#2', text="cpu2") 
-        self.lista.column("#2", width=50)
-
-        self.lista.heading('#3', text="cpu3") 
-        self.lista.column("#3", width=50)
-
-        self.lista.heading('#4', text="memo1") 
-        self.lista.column("#4", width=50)
-
-        self.lista.heading('#5', text="memo2") 
-        self.lista.column("#5", width=50)
-
-        self.lista.heading('#6', text="memo3") 
-        self.lista.column("#6", width=50)
-
-        self.lista.heading('#7', text="disco1") 
-        self.lista.column("#7", width=50)
-
-        self.lista.heading('#8', text="disco2") 
-        self.lista.column("#8", width=50)
-
-        self.lista.heading('#9', text="disco3") 
-        self.lista.column("#9", width=50)
-
-        self.lista.heading('#10', text='HORÁRIO')  
-        self.lista.column("#10", width=120)
-
-        self.lista.place(relx=0.02, rely=.05, relwidth=.9, relheight=.7)
-
-        self.scroll = Scrollbar(self.container, orient='vertical')
-        self.lista.configure(yscroll=self.scroll.set)
-        self.scroll.place(relx=0.92, rely=0.05, relwidth=.05, relheight=.7)
-
-        self.btnVoltar = Button(
-            self.container, 
-            command=App,
-            text="Voltar", 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
-            
-        self.btnVoltar.place(relx=.05, rely=.8, relwidth=.44, relheight=.1)
-
-        self.btnAnalisar = Button(
-            self.container, 
-            command=lambda: self.getAll(),
-            text="Registrar Dados", 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
-            
-        self.btnAnalisar.place(relx=.5, rely=.8, relwidth=.44, relheight=.1)
+        self.get_maq(index)
 
     def logo(self):
         
@@ -215,56 +115,56 @@ class App(Functions):
         self.logo = Label(self.container, image=image, bg='#0072AF')
         self.logo.image = image
 
-        self.logo.place(relx=.44, rely=.25, relheight=.2, relwidth=.15)
+        self.logo.place(relx=.43, rely=.25, relheight=.2, relwidth=.15)
 
     def buttons(self):
 
-        btnWidth = .4
-        btnHeight = .1
-        btnPosX = .3
+        btn_width = .25
+        btn_height = .15
+        btn_pos_y = .6
 
         # Monitorar Todos os Dados
-        self.btnReadAll = Button(
-            self.container, 
-            command=lambda: self.createAllDataList(),
-            text="Ler Todos os Dados", 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
+        # self.btnReadAll = Button(
+        #     self.container, 
+        #     command=lambda: self.createAllDataList(),
+        #     text="Ler Todos os Dados", 
+        #     font='Arial 10 bold',
+        #     bg='#00809A',
+        #     fg='white'
+        # )
             
-        self.btnReadAll.place(relx=btnPosX, rely=.5, relwidth=btnWidth, relheight=btnHeight)
+        # self.btnReadAll.place(relx=btnPosX, rely=.5, relwidth=btn_width, relheight=btn_height)
         
-        # Monitoriar CPU
-        self.btnCpu = Button(
+        # Primeira Máquina
+        self.btn_maq_1 = Button(
             self.container, 
-            command=lambda: self.createList('CPU'),
-            text="Monitorar CPU", 
+            command=lambda: self.createList(1),
+            text="Caixa 1", 
             font='Arial 10 bold',
             bg='#00809A',
             fg='white'
         )
-        self.btnCpu.place(relx=btnPosX, rely=.61, relwidth=btnWidth, relheight=btnHeight)
+        self.btn_maq_1.place(relx=.12, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
     
-        # Monitorar Memória
-        self.btnMemo = Button(
+        # Segunda Máquina
+        self.btn_maq_2 = Button(
             self.container, 
-            command=lambda: self.createList('MEMO'),
-            text="Monitorar Memória", 
+            command=lambda: self.createList(2),
+            text="Caixa 2", 
             font='Arial 10 bold',
             bg='#00809A',
             fg='white'
         )
-        self.btnMemo.place(relx=btnPosX, rely=.72, relwidth=btnWidth, relheight=btnHeight)
+        self.btn_maq_2.place(relx=.375, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
 
-        # Monitorar Disco 
-        self.btnDisk = Button(
+        # Terceira Máquina
+        self.btn_maq_3 = Button(
             self.container,
-            command=lambda: self.createList('DISCO'), 
-            text="Monitorar Disco", 
+            command=lambda: self.createList(3), 
+            text="Caixa 3", 
             font='Arial 10 bold',
             bg='#00809A',
             fg='white'
         )
-        self.btnDisk.place(relx=btnPosX, rely=.83, relwidth=btnWidth, relheight=btnHeight)
+        self.btn_maq_3.place(relx=.63, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
         
