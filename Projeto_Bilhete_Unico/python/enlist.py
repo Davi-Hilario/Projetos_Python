@@ -1,9 +1,14 @@
 from maquina import Maquina
 import psutil as ps
-from tkinter import END
+
+from tkinter import *
+
 from datetime import datetime
-from time import sleep
+
 from math import *
+
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class Enlist():
 
@@ -61,9 +66,71 @@ class Enlist():
         
     def insertData(self, cpu, memoria, disco, tempo):
 
+        self.values_cpu.append(cpu)
+        self.values_memo.append(memoria)
+        self.values_disk.append(disco)
+        self.values_tempo.append(tempo)
+
+        self.graphs()
+    
         self.lista.insert("",END, values=(f"{cpu}%", f"{memoria}%", f"{disco}%", tempo))
+
+        self.plot(self.values_cpu, self.values_memo, self.values_disk, self.values_tempo) 
+
         self.root.after(1000, lambda: self.get_maq(self.index))
+    
+    def graphs(self):
 
+        graphs_pos_y = .5
+        graphs_width = .31
+        graphs_height = .35
+
+        self.fig_cpu, self.ax_cpu = plt.subplots()
+        self.fig_memo, self.ax_memo = plt.subplots()
+        self.fig_disk, self.ax_disk = plt.subplots()
         
+        self.titulo_cpu = Label(
+            self.container, 
+            text="CPU", 
+            font='Arial 12 bold',
+            bg='#0072AF',
+            fg='white'
+            )
+        self.titulo_cpu.place(relx=.07, rely=.45, relwidth=.2, relheight=.05)
+        self.graph_cpu = FigureCanvasTkAgg(self.fig_cpu, master=self.container)
+        self.graph_cpu.get_tk_widget().place(relx=.01, rely=graphs_pos_y, relheight=graphs_height, relwidth=graphs_width)
 
+        self.titulo_memo = Label(
+            self.container, 
+            text="MEMORIA", 
+            font='Arial 12 bold',
+            bg='#0072AF',
+            fg='white'
+            )
+        self.titulo_memo.place(relx=.4, rely=.45, relwidth=.2, relheight=.05)
+        self.graph_memo = FigureCanvasTkAgg(self.fig_memo, master=self.container)
+        self.graph_memo.get_tk_widget().place(relx=.345, rely=graphs_pos_y, relheight=graphs_height, relwidth=graphs_width)
 
+        self.titulo_disco = Label(
+            self.container, 
+            text="DISCO", 
+            font='Arial 12 bold',
+            bg='#0072AF',
+            fg='white'
+            )
+        self.titulo_disco.place(relx=.75, rely=.45, relwidth=.2, relheight=.05)
+        self.graph_disk = FigureCanvasTkAgg(self.fig_disk, master=self.container)
+        self.graph_disk.get_tk_widget().place(relx=.68, rely=graphs_pos_y, relheight=graphs_height, relwidth=graphs_width)
+
+    def plot(self, cpu, memoria, disco, tempo):
+        self.ax_cpu.clear()
+        self.ax_cpu.scatter(tempo, cpu)
+        self.graph_cpu.draw()
+
+        self.ax_memo.clear()
+        self.ax_memo.scatter(tempo, memoria)
+        self.graph_memo.draw()
+
+        self.ax_disk.clear()
+        self.ax_disk.scatter(tempo, disco)
+        self.graph_disk.draw()

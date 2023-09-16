@@ -1,10 +1,17 @@
+# Importando Bibliotecas
 from enlist import Enlist
+
 from tkinter import *
 from tkinter import ttk
+
 from PIL import ImageTk
 from urllib.request import urlopen
 
-root = Tk() # criando a janela
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+
+#Iniciando aplicação
+root = Tk()
 
 class App(Enlist):
 
@@ -15,16 +22,16 @@ class App(Enlist):
         self.label()
         self.logo()
         self.buttons()
-        self.root.mainloop() # loop para que a janela continue aberta após execução do código
+        self.root.mainloop()
 
     # Configurações da tela
     def config(self):
-        self.root.title("Análise de Hardware") # titulo da tela   
-        self.root.configure(background='#004480') # cor de fundo
-        self.root.geometry('700x500') # tamanho da tela (horizontal x vertical)
-        self.root.resizable(True, True) # definindo se a tela é ajustável nos eixos x e y
-        self.root.maxsize(width=900, height=700) # tamanho máximo que a tela pode chegar
-        self.root.minsize(width=500, height=300) # tamanho minimo que a tela pode chegar
+        self.root.title("Análise de Hardware") 
+        self.root.configure(background='#004480')
+        self.root.geometry('700x500')
+        self.root.resizable(True, True)
+        self.root.maxsize(width=900, height=700)
+        self.root.minsize(width=500, height=300)
 
     def frame(self):
         self.container = Frame(
@@ -48,6 +55,7 @@ class App(Enlist):
     def createList(self, index):
 
         self.container.destroy()
+        self.root.geometry("1000x700")
 
         self.frame()
 
@@ -58,7 +66,7 @@ class App(Enlist):
             bg='#0072AF',
             fg='white'
             )
-        self.tituloCaixa.place(relx=0, rely=.05, relwidth=1, relheight=.1)
+        self.tituloCaixa.place(relx=0, rely=.005, relwidth=1, relheight=.1)
 
         self.lista = ttk.Treeview(
             self.container,
@@ -81,11 +89,11 @@ class App(Enlist):
         self.lista.heading('#4', text='HORÁRIO')  
         self.lista.column("#4", width=120)
 
-        self.lista.place(relx=.05, rely=.2, relwidth=.9, relheight=.4)
+        self.lista.place(relx=.01, rely=.1, relwidth=.98, relheight=.35)
 
         self.scroll = Scrollbar(self.container, orient='vertical')
         self.lista.configure(yscroll=self.scroll.set)
-        self.scroll.place(relx=.921, rely=.2, relwidth=.03, relheight=.4)
+        self.scroll.place(relx=.96, rely=.1, relwidth=.03, relheight=.35)
 
         self.btnVoltar = Button(
             self.container, 
@@ -96,7 +104,9 @@ class App(Enlist):
             fg='white'
         )
             
-        self.btnVoltar.place(relx=.05, rely=.8, relwidth=.44, relheight=.1)
+        self.btnVoltar.place(relx=.05, rely=.95, relwidth=.44, relheight=.05)
+
+        self.graphs()
 
         self.get_maq(index)
 
