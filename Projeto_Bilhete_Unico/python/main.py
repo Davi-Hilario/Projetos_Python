@@ -1,6 +1,7 @@
+# Grupo 07 - Memory Analytics
+# Davi Alexandre
+# RA: 02231010
+
 from menu import App
 
-try:
-    App()
-except Exception as erro:
-    print(erro)
+App()

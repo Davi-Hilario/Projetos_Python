@@ -80,8 +80,9 @@ class Dashboard():
         self.lista.configure(yscroll=self.scroll.set)
         self.scroll.place(relx=.96, rely=.1, relwidth=.03, relheight=.35)
 
-    def finalizar(self):
-        self.root.quit()
+    def voltar(self):
+        from menu import App
+        App()
 
     def machine_info_page(self, index):
         try:
@@ -99,8 +100,8 @@ class Dashboard():
 
             self.btn_voltar = Button(
                 self.container, 
-                command=self.finalizar,
-                text="Finalizar", 
+                command=self.voltar,
+                text="Voltar", 
                 font='Arial 10 bold',
                 bg='#00809A',
                 fg='white'
