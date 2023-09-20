@@ -1,3 +1,6 @@
 from menu import App
 
-App()
+try:
+    App()
+except Exception as erro:
+    print(erro)

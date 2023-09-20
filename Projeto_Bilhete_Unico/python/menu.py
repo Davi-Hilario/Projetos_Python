@@ -12,13 +12,16 @@ root = Tk()
 class App(Dashboard):
 
     def __init__(self):
-        self.root = root
-        self.config()
-        self.frame()
-        self.label()
-        self.logo()
-        self.buttons()
-        self.root.mainloop()
+        try:
+            self.root = root
+            self.config()
+            self.frame()
+            self.label()
+            self.logo()
+            self.buttons()
+            self.root.mainloop()
+        except Exception as erro:
+            print(erro)
 
     def config(self):
         self.root.title("Análise de Hardware") 
@@ -65,41 +68,43 @@ class App(Dashboard):
         self.logo.place(relx=.43, rely=.25, relheight=.2, relwidth=.15)
 
     def buttons(self):
-
-        btn_width = .25
-        btn_height = .15
-        btn_pos_y = .6
-
-        # Primeira Máquina
-        self.btn_maq_1 = Button(
-            self.container, 
-            command=lambda: self.machine_info_page(1),
-            text="Caixa 1", 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
-        self.btn_maq_1.place(relx=.12, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
-    
-        # Segunda Máquina
-        self.btn_maq_2 = Button(
-            self.container, 
-            command=lambda: self.machine_info_page(2),
-            text="Caixa 2", 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
-        self.btn_maq_2.place(relx=.375, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
-
-        # Terceira Máquina
-        self.btn_maq_3 = Button(
-            self.container,
-            command=lambda: self.machine_info_page(3), 
-            text="Caixa 3", 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
-        self.btn_maq_3.place(relx=.63, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
         
+        try:
+            btn_width = .25
+            btn_height = .15
+            btn_pos_y = .6
+
+            # Primeira Máquina
+            self.btn_maq_1 = Button(
+                self.container, 
+                command=lambda: self.machine_info_page(1),
+                text="Caixa 1", 
+                font='Arial 10 bold',
+                bg='#00809A',
+                fg='white'
+            )
+            self.btn_maq_1.place(relx=.12, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
+        
+            # Segunda Máquina
+            self.btn_maq_2 = Button(
+                self.container, 
+                command=lambda: self.machine_info_page(2),
+                text="Caixa 2", 
+                font='Arial 10 bold',
+                bg='#00809A',
+                fg='white'
+            )
+            self.btn_maq_2.place(relx=.375, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
+
+            # Terceira Máquina
+            self.btn_maq_3 = Button(
+                self.container,
+                command=lambda: self.machine_info_page(3), 
+                text="Caixa 3", 
+                font='Arial 10 bold',
+                bg='#00809A',
+                fg='white'
+            )
+            self.btn_maq_3.place(relx=.63, rely=btn_pos_y, relwidth=btn_width, relheight=btn_height)
+        except Exception as erro:
+            print(erro)

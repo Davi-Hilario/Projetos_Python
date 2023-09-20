@@ -80,31 +80,37 @@ class Dashboard():
         self.lista.configure(yscroll=self.scroll.set)
         self.scroll.place(relx=.96, rely=.1, relwidth=.03, relheight=.35)
 
+    def finalizar(self):
+        self.root.quit()
+
     def machine_info_page(self, index):
-        
-        self.container.destroy()
-        self.root.geometry("1000x700")
+        try:
+            self.container.destroy()
+            self.root.geometry("1000x700")
 
-        self.frame()
+            self.frame()
 
-        self.tituloCaixa = Label(self.container, 
-            text=f"Caixa Eletrônico {index}", font='Arial 18 bold', bg='#0072AF', fg='white')
-        self.tituloCaixa.place(relx=0, rely=.005, relwidth=1, relheight=.1)
+            self.tituloCaixa = Label(self.container, 
+                text=f"Caixa Eletrônico {index}", font='Arial 18 bold', bg='#0072AF', fg='white')
+            self.tituloCaixa.place(relx=0, rely=.005, relwidth=1, relheight=.1)
 
-        self.create_list()
-        self.create_graphs()
+            self.create_list()
+            self.create_graphs()
 
-        self.btn_voltar = Button(
-            self.container, 
-            text="Voltar", 
-            font='Arial 10 bold',
-            bg='#00809A',
-            fg='white'
-        )
-            
-        self.btn_voltar.place(relx=.05, rely=.95, relwidth=.44, relheight=.05)
+            self.btn_voltar = Button(
+                self.container, 
+                command=self.finalizar,
+                text="Finalizar", 
+                font='Arial 10 bold',
+                bg='#00809A',
+                fg='white'
+            )
+                
+            self.btn_voltar.place(relx=.28, rely=.9, relwidth=.44, relheight=.1)
 
-        self.get_maq(index)
+            self.get_maq(index)
+        except Exception as erro:
+            print(erro)
 
     def get_maq(self, index):
         
